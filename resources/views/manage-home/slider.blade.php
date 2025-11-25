@@ -1,0 +1,325 @@
+@extends('layouts.commonMaster')
+@section('layoutContent')
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="py-3 mb-4">
+            <span class="text-muted fw-light">Manage Home /</span> Slider
+        </h4>
+        <div>
+            <div class="alert alert-success d-none" id="successMessage"></div>
+        </div>
+
+        <div class="app-ecommerce-category">
+            <!-- Slider List Table -->
+            <div class="card">
+                <div class="card-datatable table-responsive">
+                    <table class="datatables-category-list table border-top">
+                        <thead>
+                            <tr>
+                                <th>SI No</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th class="text-nowrap text-sm-end">Content &nbsp;</th>
+                                <th class="text-nowrap text-sm-end">Status</th>
+                                <th class="text-lg-center">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <!-- Offcanvas to add new slider -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEcommerceCategoryList"
+                aria-labelledby="offcanvasEcommerceCategoryListLabel">
+                <!-- Offcanvas Header -->
+                <div class="offcanvas-header py-4">
+                    <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">Add Slider</h5>
+
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Alert</strong>
+      <small></small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body" id="toast-content">
+    <div class="alert alert-danger d-none" id="validationMessage"></div>
+  
+    </div>
+  </div>
+</div>
+                    <button type="button" class="btn-close bg-label-secondary text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <!-- Offcanvas Body -->
+                <div class="offcanvas-body border-top">
+                    <form class="pt-0" id="addSliderForm" enctype="multipart/form-data" onsubmit="return true">
+                        @csrf
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label class="form-label" for="ecommerce-category-title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Enter Slider Title"
+                                name="title" aria-label="Slider title">
+                        </div>
+                        <!-- COntent -->
+                        <div class="mb-3">
+                            <label class="form-label" for="ecommerce-category-slug">Content</label>
+                            <input type="text" id="content" class="form-control" placeholder="Enter Slider Content"
+                                aria-label="content" name="content">
+                        </div>
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label class="form-label" for="image">Upload Image</label>
+                            <input class="form-control" type="file" id="imageInput" name="image">
+                            <div>
+                                <img src="" class="custom-image" style="display: none;" id="imagePreview">
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <!-- <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <div class="form-control p-0 pt-1">
+                                <div class="comment-editor border-0" id="description">
+                                </div>
+
+                            </div>
+
+                        </div> -->
+                        <!-- Sort Order -->
+                           <div class="mb-3">
+                            <label class="form-label" for="ecommerce-category-slug">Sort Order</label>
+                            <input type="number" id="sort-order" class="form-control" placeholder="Enter Sort Order" name="sort_order">
+                            <input type="hidden" name="old_sort" id="old-sort" value="" >
+                        </div>
+                        <!-- Status -->
+                        <div class="mb-4 ecommerce-select2-dropdown">
+                            <label class="form-label">Select Slider status</label>
+                            <select id="status" class="select2 form-select" data-placeholder="Select Slider Status"
+                                name="status">
+                                <option value="">Select Slider Status</option>
+                                <option selected value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="is_edit" id="edit-id" value="0">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Add</button>
+                            <button type="reset" class="btn bg-label-danger"
+                                data-bs-dismiss="offcanvas">Discard</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- / Content -->
+    <!-- <script src="{{asset('assets/js/slider.js') }}"></script> -->
+
+    <script>
+        $(document).ready(function () {
+
+            // $('#offcanvasEcommerceCategoryList .btn-close').on('click', function () {
+
+            //     $('#addSliderForm').reset();
+
+            //     $('#imagePreview').hide();
+            //     $('#imagePreview').css('display', 'block');
+            // });
+
+            const toast = new bootstrap.Toast($('#liveToast'));
+            var Count = 1;
+            function clearFormData(count) {
+                toast.hide();
+                $('#addSliderForm')[0].reset();
+                $('#imagePreview').hide();
+                $('#edit-id').val(0);
+                $('#offcanvasEcommerceCategoryList').offcanvas('show');
+                $('#sort-order').val(count+1);
+             
+            }
+
+            var o = $(".datatables-category-list").DataTable({
+                ajax: {
+                    url: '{{ route("get-slider-table") }}',
+                    dataSrc: function(json){
+                           var Count = json.count;
+                        return json.data;
+                    },
+                    method: 'GET',
+
+                },
+                columns: [
+                    { data: "sort_order" },
+                    { data: "image" },
+                    { data: "title" },
+                    { data: "content" },
+                    { data: "status" },
+                    { data: "action" }
+                ],
+                // order: [2, "desc"],
+                dom: '<"card-header d-flex flex-wrap py-0"<"me-5 ms-n2 pe-5"f><"d-flex justify-content-start justify-content-md-end align-items-baseline"<"dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3"lB>>>t<"row mx-2"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                lengthMenu: [7, 10, 20, 50, 70, 100],
+                language: {
+                    sLengthMenu: "_MENU_",
+                    search: "",
+                    searchPlaceholder: "Search Slider"
+                },
+                buttons: [{
+                    text: '<i class="bx bx-plus me-0 me-sm-1"></i>Add Slider',
+                    className: "add-new btn btn-primary ms-2",
+                    // attr: {
+                    //     "data-bs-toggle": "offcanvas",
+                    //     "data-bs-target": "#offcanvasEcommerceCategoryList"
+                    // }
+                    action: function () {
+                        
+                        clearFormData(Count);
+                    }
+                }],
+                drawCallback: function( settings ) {
+                       
+                        var api = this.api();
+                        Count = api.rows().count();
+                    }
+            });
+
+
+            // var quill = new Quill('#description', {
+            //     theme: 'snow',
+            // });
+
+            $('#addSliderForm').on('submit', function (e) {
+                e.preventDefault();
+
+                // var descriptionContent = quill.root.innerHTML;
+
+                var form = this;
+                var formData = new FormData(form);
+                // formData.append('description', descriptionContent);
+
+                $.ajax({
+                    url: '{{ route("admin-home.store") }}',
+                    method: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false, beforeSend: function () {
+                        $(form).find('span.error-text').text('');
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#offcanvasEcommerceCategoryList').offcanvas('hide');
+
+                            $('#validationMessage').addClass('d-none');
+                            $('#successMessage').removeClass('d-none');
+                            $('#successMessage').text(response.success);
+                            setTimeout(function(){
+                            $('#successMessage').addClass('d-none');
+                                o.ajax.reload();
+                            },2000);
+                        } else {
+                                    console.log(response);
+                                //   $('#offcanvasEcommerceCategoryList').offcanvas('hide');
+                                $('#validationMessage').removeClass('d-none');
+                                $('#validationMessage').text('');
+                                const toast = new bootstrap.Toast($('#liveToast'), {
+                                        autohide: false,
+                                        delay: 10000
+                                    });
+                                    toast.show()
+                                    $('#validationMessage').append(response.error);
+                                $.each(response[0], function( index, value ) {
+                                    
+                                    // toast.show()
+                                    const errorMessageElement = $('<p>').attr('id', `${index}`).text(`${value}`);
+                                    $('#validationMessage').append(errorMessageElement);
+                                    
+                                    });
+                                }
+                    }
+                });
+            });
+
+            $('.datatables-category-list').on('click', '.delete', function () {
+                // $('#yourModalId').modal('show');
+                var Id = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: '{{ route("delete-slider-table") }}',
+                            method: 'POST',
+                            data: {
+                                id: Id,
+                                _token: '{{ csrf_token() }}',
+                            },
+                            success: function (response) {
+                                console.log('Item deleted successfully');
+                                o.ajax.reload();
+                            },
+                            error: function (error) {
+                                console.error('Error deleting item:', error);
+                            }
+
+                        });
+
+                    }
+                });
+
+            });
+
+            $('.datatables-category-list').on('click', '.edit', function () {
+                // $('#yourModalId').modal('show');
+                var Id = $(this).data('id');
+                toast.hide();
+                console.log(Id);
+                $.ajax({
+                    url: "{{ route('admin-home.show',['admin_home'=>':id']) }}".replace(':id', Id),
+                    method: 'GET',
+                    data: {
+                        id: Id,
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function (response) {
+                        console.log(response[0].id);
+                        $('#imagePreview').css('display', 'block');
+                        $('#offcanvasEcommerceCategoryList').offcanvas('show');
+                        $('#edit-id').val(response[0].id);
+                        $('#title').val(response[0].title);
+                        $('#content').val(response[0].content);
+                        const image = "{{asset('uploads/slider')}}" + '/' + response[0].image;
+                        $('#imagePreview').attr('src', image);
+                        $('#sort-order').val(response[0].sort_order);
+                        $('#old-sort').val(response[0].sort_order);
+                        $('#status').val(response[0].status);
+                        // quill.clipboard.dangerouslyPasteHTML(response[0].description);
+                        // editor.setContents(response.description);
+
+                        // o.ajax.reload();
+                    },
+                    error: function (error) {
+                        console.error('Error deleting item:', error);
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+    @endsection

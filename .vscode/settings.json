@@ -1,0 +1,40 @@
+{
+    "powermode.enabled": true,
+    "powermode.combo.counterEnabled": "hide",
+    "powermode.presets": "flames",
+    "powermode.combo.location": "off",
+    "powermode.shake.enabled": false,
+    "peacock.color": "#2bb1e6ba",
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#59c2ebba",
+        "activityBar.background": "#59c2ebba",
+        "activityBar.foreground": "#000000",
+        "activityBar.inactiveForeground": "#00000099",
+        "commandCenter.border": "#00000099",
+        "sash.hoverBorder": "#59c2ebba",
+        "statusBar.background": "#2bb1e6ba",
+        "statusBar.foreground": "#000000",
+        "statusBarItem.hoverBackground": "#1795c7ba",
+        "statusBarItem.remoteBackground": "#2bb1e6ba",
+        "statusBarItem.remoteForeground": "#000000",
+        "titleBar.activeBackground": "#2bb1e6ba",
+        "titleBar.activeForeground": "#000000",
+        "titleBar.inactiveBackground": "#2bb1e699",
+        "titleBar.inactiveForeground": "#00000099",
+        "activityBarBadge.background": "#e41bab",
+        "activityBarBadge.foreground": "#e7e7e7"
+    },
+    "peacock.darkForegroundColor": "#000",
+    "peacock.keepBadgeColor": false
+} // {
+//     "powermode.enabled": true,
+//     "powermode.presets": "flames",
+//     "powermode.explosionSize": 6,
+//     "powermode.explosionFrequency": 1,
+//     "powermode.shake": false,
+//     "powermode.comboLocation": "hidden"   // Completely hides the counter
+//     "powermode.comboThreshold": 0,
+//     "powermode.comboTimeout": 0,
+//     "powermode.showComboCounter": false,  // Hides the "47X" or any counter
+//     "powermode.showScore": false,         // Hides any extra numbers
+// }

@@ -1,0 +1,2 @@
+[24-Jun-2025 09:02:37 UTC] PHP Fatal error:  Cannot use Illuminate\Support\ServiceProvider as ServiceProvider because the name is already in use in /home3/p2jmart/public_html/app/Providers/AppServiceProvider.php on line 14
+[18-Jul-2025 05:15:30 UTC] PHP Fatal error:  Cannot use App\Models\Subcategory as Subcategory because the name is already in use in /home3/p2jmart/public_html/app/Http/Controllers/CategoryController.php on line 11

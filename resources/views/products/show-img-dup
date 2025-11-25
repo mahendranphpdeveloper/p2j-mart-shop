@@ -1,0 +1,122 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    @if($product->units->isNotEmpty())
+    @php $unit = $product->units->first(); @endphp
+
+    <div class="section pt-5">
+        <div class="custom-container1">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+                    <div class="product-image d-flex">
+                        <!-- Left Side: Thumbnail Gallery -->
+                        <div id="pr_item_gallery" class="me-3">
+                        @foreach($product->images as $img)
+    @foreach([$img->web_image_2, $img->web_image_3, $img->web_image_4, $img->web_image_5] as $index => $thumb)
+        <div class="item mb-2">
+            @if($thumb)
+                <a href="#" class="product_gallery_item"
+                   data-image="{{ asset('uploads/products/' . $thumb) }}"
+                   data-zoom-image="{{ asset('uploads/products/' . $thumb) }}">
+                    <img src="{{ asset('uploads/products/' . $thumb) }}" alt="product_thumb_{{ $index + 2 }}" class="img-fluid" style="max-width: 60px;">
+                </a>
+            @else
+                <div class="product_gallery_item text-muted" style="padding: 10px; border: 1px solid #ddd; font-size: 12px; width: 60px; text-align: center;">
+                    No image {{ $index + 2 }}
+                </div>
+            @endif
+        </div>
+    @endforeach
+@endforeach
+
+                        </div>
+
+                        <!-- Main Product Image (Center) -->
+                        <div class="product_img_box flex-grow-1">
+                        @if($product->images->first() && $product->images->first()->web_image_1)
+    <img id="product_img"
+         src="{{ asset('uploads/products/' . $product->images->first()->web_image_1) }}"
+         data-zoom-image="{{ asset('uploads/products/' . $product->images->first()->web_image_1) }}"
+         alt="product_img1"
+         class="img-fluid">
+@else
+    <div class="text-muted text-center" style="padding: 50px; border: 1px solid #ccc;">
+        No Main Image
+    </div>
+@endif
+
+                            <a href="#" class="product_img_zoom" title="Zoom">
+                                <i class="fas fa-search-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Product Info -->
+                <div class="col-lg-6 col-md-6">
+                    <!-- Product Name -->
+                    <h1 style="font-size: 1.5rem;">{{ $product->product_name }}</h1>
+
+
+                    {{-- Meta Title --}}
+                    @if($product->metaTitle)
+                        <h4 class="text-muted">{{ $product->metaTitle->title }}</h4>
+                    @endif
+
+                    {{-- Price --}}
+                    @if($product->units->isNotEmpty())
+                        @php $unit = $product->units->first(); @endphp
+                        <p>
+                            <strong>Price:</strong>
+                            <span class="text-success ms-2" style="font-size: 16px ;">
+                                ₹{{ $unit->unit_price }}
+                            </span>
+                            <span class="text-muted text-decoration-line-through" style="font-size: 12px ">
+                                ₹{{ $unit->mrp_price }}
+                            </span>
+                        </p>
+                    @else
+                        <p><strong>Price:</strong> ₹{{ $product->discount_price ?? $product->base_price }}</p>
+                    @endif
+
+                    {{-- Description --}}
+                    <p><strong>Description:</strong> {{ $product->description }}</p>
+
+                    {{-- Meta Description --}}
+                    @if($product->metaDescription)
+                        <div class="mt-3">
+                            <h5>Meta Description:</h5>
+                            <p>{{ $product->metaDescription->description }}</p>
+                        </div>
+                    @endif
+
+                    {{-- Keypoints --}}
+                    @if($product->keypoints->isNotEmpty())
+                        <div class="mt-3">
+                            <h5>Keypoints:</h5>
+                            <ul>
+                                @foreach($product->keypoints as $keypoint)
+                                    <li>{{ $keypoint->key }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    {{-- Size and Color --}}
+                    @if($product->units->isNotEmpty())
+                        <div class="mt-3">
+                            <p><strong>Size:</strong> {{ $unit->size->size_name ?? 'N/A' }}</p>
+                            <p><strong>Color:</strong> {{ $unit->color->color_name ?? 'N/A' }}</p>
+                        </div>
+                    @else
+                        <p><strong>Size:</strong> Not available</p>
+                        <p><strong>Color:</strong> Not available</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+</div>
+@endsection

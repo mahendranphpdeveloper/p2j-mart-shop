@@ -1,0 +1,260 @@
+
+<div class="category-container">
+    <h2 class="category-title">Gift Items</h2>
+    <div class="swiper-container category-swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-1.jpg" alt="Mobile Phone">
+                    <p>Submenu 1</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-2.jpg" alt="Headphone">
+                    <p>Submenu 2</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-3.jpg" alt="Laptop">
+                    <p>Submenu 3</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-4.jpg" alt="Smartwatch">
+                    <p>Submenu 4</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-5.jpg" alt="Smartwatch">
+                    <p>Submenu 5</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-6.jpg" alt="Smartwatch">
+                    <p>Submenu 6</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-1.jpg" alt="Smartwatch">
+                    <p>Submenu 7</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-2.jpg" alt="Smartwatch">
+                    <p>Submenu 8</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-3.jpg" alt="Smartwatch">
+                    <p>Submenu 9</p>
+                </a>
+            </div>
+            <div class="swiper-slide category-slide">
+                <a href="electrical.php">
+                    <img src="assets/images/gift-4.jpg" alt="Smartwatch">
+                    <p>Submenu 10</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Swiper Navigation Buttons -->
+        <div class="swiper-button-next category-button-next"></div>
+        <div class="swiper-button-prev category-button-prev"></div>
+    </div>
+</div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 p-0">
+                <div class="category-container1">
+                    <h2 class="category-title">Electronics</h2>
+                    <div class="swiper-container ads-category-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img1.jpg" alt="Mobile Phone">
+                                <p>Submenu 1</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img12.jpg" alt="Headphone">
+                                <p>Submenu 2</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img3.jpg" alt="Laptop">
+                                <p>Submenu 3</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img4.jpg" alt="Smartwatch">
+                                <p>Submenu 4</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img5.jpg" alt="Smartwatch">
+                                <p>Submenu 5</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img7.jpg" alt="Smartwatch">
+                                <p>Submenu 6</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img9.jpg" alt="Smartwatch">
+                                <p>Submenu 7</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_hover_img12.jpg" alt="Smartwatch">
+                                <p>Submenu 8</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_img1.jpg" alt="Smartwatch">
+                                <p>Submenu 9</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/el_img2.jpg" alt="Smartwatch">
+                                <p>Submenu 10</p>
+                            </div>
+                        </div>
+
+                        <!-- Swiper Navigation Buttons (INSIDE category-container) -->
+                        <div class="swiper-button-next category-button-next"></div>
+                        <div class="swiper-button-prev category-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                <div class="category-ad-image">
+                    <img src="assets/images/shop_banner_im.png" alt="" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="category-container">
+        <h2 class="category-title">Furnitures</h2>
+        <div class="swiper-container category-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture1.webp" alt="Mobile Phone">
+                    <p>Submenu 1</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture2.webp" alt="Headphone">
+                    <p>Submenu 2</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture3.webp" alt="Laptop">
+                    <p>Submenu 3</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture4.webp" alt="Smartwatch">
+                    <p>Submenu 4</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture5.webp" alt="Smartwatch">
+                    <p>Submenu 5</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture1.webp" alt="Smartwatch">
+                    <p>Submenu 6</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture2.webp" alt="Smartwatch">
+                    <p>Submenu 7</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture3.webp" alt="Smartwatch">
+                    <p>Submenu 8</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture5.webp" alt="Smartwatch">
+                    <p>Submenu 9</p>
+                </div>
+                <div class="swiper-slide category-slide">
+                    <img src="./assets/images/category/furniture4.webp" alt="Smartwatch">
+                    <p>Submenu 10</p>
+                </div>
+            </div>
+
+            <!-- Swiper Navigation Buttons (INSIDE category-container) -->
+            <div class="swiper-button-next category-button-next"></div>
+            <div class="swiper-button-prev category-button-prev"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+
+        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                <div class="category-ad-image">
+                    <img src="assets/images/banner-img-12.png" alt="" >
+                </div>
+            </div>
+
+
+            <div class="col-lg-9 col-md-9 col-sm-12 p-0">
+                <div class="category-container1">
+                    <h2 class="category-title">Jewellery</h2>
+                    <div class="swiper-container ads-category-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery1.webp" alt="Mobile Phone">
+                                <p>Submenu 1</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery2.webp" alt="Headphone">
+                                <p>Submenu 2</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery3.webp" alt="Laptop">
+                                <p>Submenu 3</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery4.webp" alt="Smartwatch">
+                                <p>Submenu 4</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery5.webp" alt="Smartwatch">
+                                <p>Submenu 5</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery6.webp" alt="Smartwatch">
+                                <p>Submenu 6</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery1.webp" alt="Smartwatch">
+                                <p>Submenu 7</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery2.webp" alt="Smartwatch">
+                                <p>Submenu 8</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery3.webp" alt="Smartwatch">
+                                <p>Submenu 9</p>
+                            </div>
+                            <div class="swiper-slide category-slide">
+                                <img src="./assets/images/category/jwellery4.webp" alt="Smartwatch">
+                                <p>Submenu 10</p>
+                            </div>
+                        </div>
+
+                        <!-- Swiper Navigation Buttons (INSIDE category-container) -->
+                        <div class="swiper-button-next category-button-next"></div>
+                        <div class="swiper-button-prev category-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+
+          
+        </div>
+    </div>
+

@@ -1,0 +1,64 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h2 class="mb-4">Products in: {{ $subcategory->title }}</h2>
+
+        @if($products->isEmpty())
+            <p>No products found in this subcategory.yohohohho</p>
+        @else
+            <div class="row">
+            @foreach($products as $product)
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            @if($product->images->isNotEmpty())
+                <img src="{{ asset($product->images->first()->web_image_1) }}" class="card-img-top" alt="{{ $product->product_name }}">
+            @else
+                <img src="{{ asset('default-product.jpg') }}" class="card-img-top" alt="{{ $product->product_name }}">
+            @endif
+
+            <div class="card-body">
+                <h5 class="card-title">{{ $product->product_name }}</h5>
+
+                @php
+                    $unit = $product->units->first(); // Get the first unit (or loop if you want all)
+                @endphp
+
+                @if($unit)
+                    <p>
+                        <span class="text-muted text-decoration-line-through">₹{{ $unit->mrp_price }}</span>
+                        <strong class="text-success ms-2">₹{{ $unit->unit_price }}</strong>
+                    </p>
+                @else
+                    <p class="text-danger">No unit pricing found</p>
+                @endif
+
+                <a href="{{ route('product.view', $product->slug) }}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+
+<div class="product_size_switch">
+    @php $activeSize = request('size'); @endphp
+
+    @foreach($sizes as $size)
+        @php
+            $isUsed = in_array($size->size_name, $usedSizes);
+        @endphp
+
+        <a href="{{ route('subcategory.products', ['id' => $subcategory->id, 'size' => $size->size_name]) }}"
+           class="badge me-1 mb-1
+               {{ $activeSize === $size->size_name ? 'bg-primary text-white' : ($isUsed ? 'bg-light text-dark border border-secondary' : 'bg-secondary text-white') }}"
+           style="cursor:pointer;">
+           {{ $size->size_name }}
+        </a>
+    @endforeach
+</div>
+
+
+            </div>
+        @endif
+    </div>
+@endsection

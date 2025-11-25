@@ -1,0 +1,71 @@
+@extends('layouts.commonMaster')
+
+@section('layoutContent')
+
+<div class="container mt-4">
+
+    @if(session('success'))
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container top-0 end-0 p-3">
+            <div class="bs-toast toast show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class='bx bx-bell me-2'></i>
+                    <div class="me-auto fw-medium">Message</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    <div class="app-ecommerce">
+        <form action="{{ route('save-privacy-policy') }}" method="POST">
+            @csrf
+    
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Privacy Policy</h5>
+                </div>
+                <div class="card-body">
+    
+                    <!-- Title Input -->
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" 
+                            value="{{ isset($privacyPolicy) ? $privacyPolicy->title : '' }}" required>
+                    </div>
+    
+                    <!-- CKEditor Content -->
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" id="content" name="content">
+                            {{ isset($privacyPolicy) ? $privacyPolicy->content : '' }}
+                        </textarea>
+                    </div>
+    
+                    <!-- Save Button -->
+                    <button type="submit" class="btn btn-primary">Save</button>
+    
+                </div>
+            </div>
+    
+        </form>
+    </div>
+    
+    <!-- CKEditor Script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor.create(document.querySelector('#content'))
+            .then(editor => {
+                document.querySelector('form').addEventListener('submit', function(event) {
+                    document.querySelector('#content').value = editor.getData(); // Pass data before submission
+                });
+            })
+            .catch(error => console.error(error));
+    </script>
+    
+    
+
+    @endsection

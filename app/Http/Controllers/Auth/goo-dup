@@ -1,0 +1,136 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Mail\VerifyEmail;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+class GoogleLoginController extends Controller
+{
+    /**
+     * Redirect the user to the Google OAuth page.
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Handle Google callback and login the user.
+     */
+    public function handleGoogleCallback()
+    {
+        try {
+            // Use stateless() to avoid session issues during callback
+            $googleUser = Socialite::driver('google')->stateless()->user();
+
+            // Log the Google user info for debugging
+            Log::info('Google user retrieved', [
+                'id' => $googleUser->id,
+                'email' => $googleUser->email,
+                'name' => $googleUser->name,
+            ]);
+
+            // Store Google user data in session (only serializable data!)
+            session([
+                'google_user' => [
+                    'id' => $googleUser->id,
+                    'email' => $googleUser->email,
+                    'name' => $googleUser->name,
+                ]
+            ]);
+
+            // Try to find existing user by email
+            $user = User::where('email', $googleUser->email)->first();
+
+            if (!$user) {
+                // If user does not exist, redirect to registration with prefilled info
+                Log::warning('Google login failed - user not found.');
+                return redirect()->route('register')->with([
+                    'google_name' => $googleUser->name,
+                    'google_email' => $googleUser->email,
+                    'google_id' => $googleUser->id,
+                    'error' => 'Your account is not with us, please register.'
+                ]);
+            }
+
+            // If phone is not yet saved, redirect to form to collect phone
+            if (!$user->phone) {
+                return redirect()->route('google.phone.form');
+            }
+
+            // Auto-verify the user's email for Google accounts
+            if (!$user->email_verified_at) {
+                $user->email_verified_at = now();
+                $user->save();
+                Log::info('Email auto-verified for Google login', ['email' => $user->email]);
+            }
+
+            // Log the user in
+            Auth::login($user);
+            Log::info('User logged in via Google', ['user_id' => $user->id]);
+            return redirect()->route('home');
+
+        } catch (\Exception $e) {
+            // Log the full exception with stack trace
+            Log::error('Google Login Error', ['exception' => $e]);
+            return redirect()->route('login.user')->with('error', 'Unable to login with Google. Please try again.');
+        }
+    }
+
+    /**
+     * Show form to enter phone number after Google login (first-time only).
+     */
+    public function showPhoneForm()
+    {
+        $googleUser = session('google_user');
+
+        if (!$googleUser) {
+            return redirect()->route('login.user')->with('error', 'Google user session not found.');
+        }
+
+        return view('auth.phone', compact('googleUser'));
+    }
+
+    /**
+     * Save the phone number submitted by the user after Google login.
+     */
+    public function submitPhoneForm(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|numeric',
+        ]);
+
+        $googleUser = session('google_user');
+
+        if (!$googleUser) {
+            return redirect()->route('login.user')->with('error', 'Google user data not found. Please try again.');
+        }
+
+        // Find the user by Google ID or email
+        $user = User::where('google_id', $googleUser['id'])
+            ->orWhere('email', $googleUser['email'])
+            ->first();
+
+        if ($user) {
+            // Update phone and google_id (if not already saved)
+            $user->phone = $request->phone;
+            $user->google_id = $googleUser['id'];
+            $user->save();
+
+            // Login user
+            Auth::login($user);
+            Log::info('Phone number saved & user logged in', ['user_id' => $user->id]);
+
+            return redirect()->route('home');
+        }
+
+        return redirect()->route('login.user')->with('error', 'Unable to find your account. Please register.');
+    }
+}

@@ -1,0 +1,58 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>{{ $product->name }}</h1>
+
+    {{-- Meta Title --}}
+    @if($product->metaTitle)
+        <h4 class="text-muted">{{ $product->metaTitle->title }}</h4>
+    @endif
+
+    {{-- Product Images --}}
+    <div class="row mb-4">
+        @foreach($product->images as $img)
+            @if($img->web_image_1)
+                <div class="col-md-3">
+                    <img src="{{ asset($img->web_image_1) }}" class="img-fluid" alt="Product Image">
+                </div>
+            @endif
+        @endforeach
+    </div>
+
+    {{-- Prices --}}
+    @if($product->units->isNotEmpty())
+        @php $unit = $product->units->first(); @endphp
+        <p>
+            <strong>Price:</strong>
+            <span class="text-muted text-decoration-line-through">₹{{ $unit->mrp_price }}</span>
+            <span class="text-success ms-2">₹{{ $unit->unit_price }}</span>
+        </p>
+    @else
+        <p><strong>Price:</strong> ₹{{ $product->discount_price ?? $product->base_price }}</p>
+    @endif
+
+    {{-- Description --}}
+    <p><strong>Description:</strong> {{ $product->description }}</p>
+
+    {{-- Meta Description --}}
+    @if($product->metaDescription)
+        <div class="mt-3">
+            <h5>Meta Description:</h5>
+            <p>{{ $product->metaDescription->description }}</p>
+        </div>
+    @endif
+
+    {{-- Keypoints --}}
+    @if($product->keypoints->isNotEmpty())
+        <div class="mt-3">
+            <h5>Keypoints:</h5>
+            <ul>
+                @foreach($product->keypoints as $keypoint)
+                    <li>{{ $keypoint->key }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
+@endsection

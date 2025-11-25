@@ -1,0 +1,376 @@
+@extends('layouts.commonMaster')
+@section('layoutContent')
+<script src="{{ asset('assets/js/app-ecommerce-product-add.js') }}"></script>
+
+<!-- Add Font Awesome (if not already included) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+@if (session('message'))
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container top-0 end-0 p-3">
+        <div class="bs-toast toast show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class='bx bx-bell me-2'></i>
+                <div class="me-auto fw-medium">Message</div>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ session('message') }}
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+
+<form action="{{route('save-common')}}" method="Post" enctype="multipart/form-data">
+    @csrf
+
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="d-flex justify-content-between">
+            <div class="h4 py-1 mb-4">
+                <span class="text-muted fw-light"></span> Header and Footer
+            </div>
+            <div>
+                <!-- <button type="reset" class="btn btn-danger me-2">Reset</button> -->
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="div">
+                <div class="card p-3 mb-3">
+
+                    <div class="meta-section">
+                        <div class="mb-3 ps-3 ">
+                            <label class="form-label" for="home_meta_title">Meta title</label>
+                            <input type="text" class="form-control" id="home_meta_title" value="{{ old('home_meta_title', $common->home_meta_title ?? '') }}" placeholder="Enter Meta Title" name="home_meta_title">
+                            @if($errors->has('home_meta_title'))
+                            <div class="text-danger">{{ $errors->first('home_meta_title') }}</div>
+                            @endif
+                        </div>
+                        <div class="mb-3 ps-3 ">
+                            <label class="form-label" for="img_title">Meta Keywords</label>
+                            <input type="text" class="form-control" name="home_meta_keywords" value="{{ old('home_meta_keywords', $common->home_meta_keywords ?? '') }}">
+                            @if($errors->has('home_meta_keywords'))
+                            <div class="text-danger">{{ $errors->first('home_meta_keywords') }}</div>
+                            @endif
+                            <help class="text-muted">Use Comma , Tab, Enter Keys to Add in Multiple </help>
+                        </div>
+    
+                        <div class="mb-3 ps-3 ">
+                            <label class="form-label" for="img_title">Description </label>
+                            <input type="text" class="form-control" value="{{ old('home_meta_description', $common->home_meta_description ?? '') }}" placeholder="Enter Meta Description" name="home_meta_description">
+                            @if($errors->has('home_meta_description'))
+                            <div class="text-danger">{{ $errors->first('home_meta_description') }}</div>
+                            @endif
+                        </div>
+                      
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+
+
+
+                        <label>Top Bar</label>
+                        <div class="row">
+
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+
+                                <div class="mb-2 ps-3 pe-3">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" name="email" value="{{ old('email', $common->email ?? '') }}">
+                                    @if($errors->has('email'))
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
+                                    @endif
+                                </div>
+                                <div class="mb-2 ps-3 pe-3">
+                                    <label>Mobile No</label>
+                                    <input type="text" class="form-control" name="mobile_no" value="{{ old('mobile_no', $common->mobile_no ?? '') }}">
+                                    @if($errors->has('mobile_no'))
+                                    <div class="text-danger">{{ $errors->first('mobile_no') }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-2 ps-3 pe-3">
+                                    <label for="address">Address</label>
+                                    <textarea
+                                        class="form-control"
+                                        name="address"
+                                        rows="4"
+                                        placeholder="Enter address here">{{ old('address', $common->address ?? '') }}</textarea>
+                                    @if($errors->has('address'))
+                                    <div class="text-danger">{{ $errors->first('address') }}</div>
+                                    @endif
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="mb-3 ps-3 ">
+                                <label class="form-label" for="header_title">Header Nav Bar Logo Title</label>
+                                <input type="phone" class="form-control" id="header_title" value="{{ old('header_title', $common->header_title ?? '') }}" placeholder="Enter Header Title" name="header_title">
+                                @if($errors->has('header_title'))
+                                <div class="text-danger">{{ $errors->first('header_title') }}</div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+
+                            <!--              
+                                    
+                                <div class="mb-3 ps-3 pe-3">
+                                    <label>Footer Content</label>
+                                    <textarea rows="5"  class="form-control" name="footer_content">{{ old('footer_content', $common->footer_content ?? '') }}</textarea>
+                                    @if($errors->has('footer_content'))
+                                    <div class="text-danger">{{ $errors->first('footer_content') }}</div>
+                                    @endif
+                                </div> -->
+
+                            <label class="form-label" for="header_title">Call To Action </label>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="mb-2 ps-3 pe-3">
+                                        <label class="form-label" for="header_title">title </label>
+                                        <input type="phone" class="form-control" id="footer_contact_title" value="{{ old('footer_contact_title', $common->footer_contact_title ?? '') }}" placeholder="Enter Footer Title" name="footer_contact_title">
+                                        @if($errors->has('footer_contact_title'))
+                                        <div class="text-danger">{{ $errors->first('footer_contact_title') }}</div>
+                                        @endif
+                                        <br>
+
+                                    </div>
+                                    <div class="mb-2 ps-3 pe-3">
+                                        <label>Facebook link</label>
+                                        <input type="text" class="form-control" name="facebook_link" value="{{ old('facebook_link', $common->facebook_link ?? '') }}">
+                                        @if($errors->has('facebook_link'))
+                                        <div class="text-danger">{{ $errors->first('facebook_link') }}</div>
+                                        @endif
+                                        <br>
+                                    </div>
+                                    <div class="mb-2 ps-3 pe-3">
+                                        <label>Insta link</label>
+                                        <input type="text" class="form-control" name="insta_link" value="{{ old('insta_link', $common->insta_link ?? '') }}">
+                                        @if($errors->has('insta_link'))
+                                        <div class="text-danger">{{ $errors->first('insta_link') }}</div>
+                                        @endif
+                                        <br>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="mb-2 ps-3 pe-3">
+                                        <label>Twitter link</label>
+                                        <input type="text" class="form-control" name="twitter_link" value="{{ old('twitter_link', $common->twitter_link ?? '') }}">
+                                        @if($errors->has('twitter_link'))
+                                        <div class="text-danger">{{ $errors->first('twitter_link') }}</div>
+                                        @endif
+                                        <br>
+                                    </div>
+                                    <div class="mb-2 ps-3 pe-3">
+                                        <label>Youtube link</label>
+                                        <input type="text" class="form-control" name="youtube_link" value="{{ old('youtube_link', $common->youtube_link ?? '') }}">
+                                        @if($errors->has('youtube_link'))
+                                        <div class="text-danger">{{ $errors->first('youtube_link') }}</div>
+                                        @endif
+                                        <br>
+
+                                    </div>
+
+                                    <div class="mb-2 ps-3 pe-3">
+                                        <label>Linkedin link</label>
+                                        <input type="text" class="form-control" name="linkedin_link" value="{{ old('linkedin_link', $common->linkedin_link ?? '') }}">
+                                        @if($errors->has('linkedin_link'))
+                                        <div class="text-danger">{{ $errors->first('linkedin_link') }}</div>
+                                        @endif
+                                        <!-- <help class="text-muted">Leave empty if you don't want to show this </help> -->
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="container mt-4">
+                    <div class="row">
+    <!-- Down Content 1 -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Down Content 1</h5>
+
+                <!-- Icon input with preview -->
+                <div class="form-group">
+                    <label>Icon (Font Awesome)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control icon-input" name="down_content_1[0][icon]"
+                               placeholder="fa fa-icon" onkeyup="updateIconPreview(this, 'icon-preview-1-fa')"
+                               value="{{ old('down_content_1[0][icon]', json_decode($common->down_content_1)[0]->icon ?? '') }}">
+                        <span class="input-group-text" id="icon-preview-1">
+                            <i class="fa {{ old('down_content_1[0][icon]', json_decode($common->down_content_1)[0]->icon ?? '') }} " id="icon-preview-1-fa"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Title input -->
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control"
+                           name="down_content_1[0][title]"
+                           placeholder="Title"
+                           value="{{ old('down_content_1[0][title]', json_decode($common->down_content_1)[0]->title ?? '') }}">
+                </div>
+
+                <!-- Content input -->
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea class="form-control" name="down_content_1[0][content]" placeholder="Content">{{ old('down_content_1[0][content]', json_decode($common->down_content_1)[0]->content ?? '') }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Down Content 2 -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Down Content 2</h5>
+
+                <!-- Icon input with preview -->
+                <div class="form-group">
+                    <label>Icon (Font Awesome)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control icon-input" name="down_content_2[0][icon]"
+                               placeholder="fa fa-icon" onkeyup="updateIconPreview(this, 'icon-preview-2-fa')"
+                               value="{{ old('down_content_2[0][icon]', json_decode($common->down_content_2)[0]->icon ?? '') }}">
+                        <span class="input-group-text" id="icon-preview-2">
+                            <i class="fa {{ old('down_content_2[0][icon]', json_decode($common->down_content_2)[0]->icon ?? '') }}" id="icon-preview-2-fa"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Title input -->
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control"
+                           name="down_content_2[0][title]"
+                           placeholder="Title"
+                           value="{{ old('down_content_2[0][title]', json_decode($common->down_content_2)[0]->title ?? '') }}">
+                </div>
+
+                <!-- Content input -->
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea class="form-control" name="down_content_2[0][content]" placeholder="Content">{{ old('down_content_2[0][content]', json_decode($common->down_content_2)[0]->content ?? '') }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Down Content 3 -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Down Content 3</h5>
+
+                <!-- Icon input with preview -->
+                <div class="form-group">
+                    <label>Icon (Font Awesome)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control icon-input" name="down_content_3[0][icon]"
+                               placeholder="fa fa-icon" onkeyup="updateIconPreview(this, 'icon-preview-3-fa')"
+                               value="{{ old('down_content_3[0][icon]', json_decode($common->down_content_3)[0]->icon ?? '') }}">
+                        <span class="input-group-text" id="icon-preview-3">
+                            <i class="fa {{ old('down_content_3[0][icon]', json_decode($common->down_content_3)[0]->icon ?? '') }}" id="icon-preview-3-fa"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Title input -->
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control"
+                           name="down_content_3[0][title]"
+                           placeholder="Title"
+                           value="{{ old('down_content_3[0][title]', json_decode($common->down_content_3)[0]->title ?? '') }}">
+                </div>
+
+                <!-- Content input -->
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea class="form-control" name="down_content_3[0][content]" placeholder="Content">{{ old('down_content_3[0][content]', json_decode($common->down_content_3)[0]->content ?? '') }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    </div>
+
+
+                </div>
+
+</form>
+
+
+<!-- / Content -->
+
+</div>
+<!--/ Content wrapper -->
+
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // CKEDITOR.replace('address', {
+        //     extraAllowedContent: 'table(*)'
+        // });
+
+        const toastEl = document.querySelector('.toast');
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, {
+                autohide: true,
+                delay: 5000
+            });
+            setTimeout(() => {
+                toast.hide();
+            }, 3000);
+        }
+        const keywords = document.querySelector('input[name=home_meta_keywords]');
+        new Tagify(keywords);
+
+    });
+</script>
+<script>
+    // Function to update the icon preview based on the input
+    function updateIconPreview(input) {
+        // Get the corresponding preview element by ID
+        const inputName = input.name.split('[')[0]; // Extract down_content_1, down_content_2, or down_content_3
+        const iconPreview = document.getElementById('icon-preview-' + inputName.charAt(inputName.length - 1)); // Get the right preview
+        const iconClass = input.value;
+
+        // Update the icon preview
+        const iconElement = iconPreview.querySelector('i');
+        iconElement.className = ''; // Reset previous icon class
+        iconElement.classList.add('fa', ...iconClass.split(' ')); // Add the new icon class
+    }
+</script>
+
+
+
+
+@endsection
