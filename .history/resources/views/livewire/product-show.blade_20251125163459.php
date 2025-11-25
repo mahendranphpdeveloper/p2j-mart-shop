@@ -335,12 +335,12 @@
             console.log('Added to cart:', event.detail);
         });
 
+        // Listen for the custom event dispatched by Livewire's $this->dispatch('buy-now', $checkoutData)
         window.addEventListener('buy-now', event => {
-            console.log('ffsdf');
-            // Handle buy now event from Livewire (redirect to server checkout)
-            const detail = event.detail;
+            // Extract the checkout data sent from the backend component
+            const checkoutData = event.detail;
 
-            // Make a POST request to create/initiate checkout session
+            // Initiate the checkout process by sending this data to the backend
             fetch('/products/checkout/initiate', {
                 method: 'POST',
                 headers: {
@@ -348,7 +348,7 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(detail)
+                body: JSON.stringify(checkoutData)
             })
             .then(response => {
                 if (!response.ok) {
@@ -358,6 +358,7 @@
             })
             .then(data => {
                 if (data.success && data.session_id) {
+                    // Redirect user to checkout page for the session
                     window.location.href = `/products/checkout/${encodeURIComponent(data.session_id)}`;
                 } else {
                     alert(data.message || "An error occurred. Could not initiate checkout.");

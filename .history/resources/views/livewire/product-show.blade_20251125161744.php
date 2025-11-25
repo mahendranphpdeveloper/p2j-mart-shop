@@ -336,37 +336,9 @@
         });
 
         window.addEventListener('buy-now', event => {
-            console.log('ffsdf');
-            // Handle buy now event from Livewire (redirect to server checkout)
-            const detail = event.detail;
-
-            // Make a POST request to create/initiate checkout session
-            fetch('/products/checkout/initiate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(detail)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw err; });
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success && data.session_id) {
-                    window.location.href = `/products/checkout/${encodeURIComponent(data.session_id)}`;
-                } else {
-                    alert(data.message || "An error occurred. Could not initiate checkout.");
-                }
-            })
-            .catch(error => {
-                console.error("Buy Now Error:", error);
-                alert(error.message || "Failed to initiate checkout.");
-            });
+            // Handle buy now, e.g., submit form or redirect
+            console.log('Buy now:', event.detail);
+            // Example: window.location.href = '/checkout?data=' + JSON.stringify(event.detail);
         });
 
         window.addEventListener('open-rating-popup', event => {

@@ -162,7 +162,7 @@ class OrderController extends Controller
         return $itemData;
     }
 
-    protected function createOrderRecords($itemData, $transactionId, $userId, $sessionId, $addressId, $subtotal, $shippingCost, $checkout_type)
+    protected function createOrderRecords($itemData, $transactionId, $userId, $sessionId, $addressId, $subtotal, $shippingCost,$checkout_type)
     {
         Log::info(print_r($itemData, true));
 

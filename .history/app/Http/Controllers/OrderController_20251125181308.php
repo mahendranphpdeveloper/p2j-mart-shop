@@ -42,7 +42,7 @@ class OrderController extends Controller
             $subtotal = collect($itemData)->sum(fn($i) => $i['quantity'] * $i['unit_price']);
             $addressId = $validated['address_id'];
             $checkout_type = $validated['checkout_type'];
-            
+    
             // Shipping Cost
             if ($checkout_type === 'buy_now') {
                 $shippingCost = $this->shippingService->calculateShippingCost(
@@ -162,7 +162,7 @@ class OrderController extends Controller
         return $itemData;
     }
 
-    protected function createOrderRecords($itemData, $transactionId, $userId, $sessionId, $addressId, $subtotal, $shippingCost, $checkout_type)
+    protected function createOrderRecords($itemData, $transactionId, $userId, $sessionId, $addressId, $subtotal, $shippingCost,$checkout_type)
     {
         Log::info(print_r($itemData, true));
 
@@ -193,7 +193,7 @@ class OrderController extends Controller
             'session_id' => $sessionId,
             'payment_status' => 'pending',
             'order_status' => 'processing',
-            'checkout_type' => $checkout_type,
+            'checkout_type' => 'checkout_type',
         ]);
 
         // Create order items

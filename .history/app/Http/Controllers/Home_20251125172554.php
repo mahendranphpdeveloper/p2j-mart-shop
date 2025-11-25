@@ -432,18 +432,8 @@ class Home extends Controller
     public function buyNowCheckout()
     {
         try {
-            // Retrieve the flashed checkout data from session (after redirect with()->with())
+            // Retrieve the flashed checkout data from session (from previous redirect with()->with())
             $checkoutData = session()->get('checkoutData');
-            if (!$checkoutData) {
-                // If no checkoutData in session, redirect back and set it (maybe user used direct route)
-                // You'll need to have $checkoutData available here or in the request
-                $checkoutData = request()->all();
-                if ($checkoutData) {
-                    return redirect()->route('buynow.checkout')->with('checkoutData', $checkoutData);
-                }
-                Log::error('BuyNow Checkout failed: Missing checkoutData in session.');
-                return redirect()->route('cart.view')->with('error', 'Invalid or expired buy now session.');
-            }
             $user = Auth::user();
 
             if (!$checkoutData) {
@@ -474,12 +464,7 @@ class Home extends Controller
                     'session_id' => session()->getId(),
                 ])
             ]);
-            Log::info('BuyNow Checkout - Assembled cartItems for parity', [
-                'cartItems' => $cartItems->toArray(),
-                'checkoutData' => $checkoutData,
-                'user_id' => $user->id,
-                'session_id' => session()->getId()
-            ]);
+
             // Calculate shipping cost (if address selected & you want similar UX as cart checkout)
             $shippingCost = 0;
             if ($addressId) {

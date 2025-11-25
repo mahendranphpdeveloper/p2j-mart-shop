@@ -313,24 +313,24 @@ class ProductShow extends Component
     {
         return $this->currentUnit?->unit_price ?? 0;
     }
+
     public function buyNow()
     {
         $checkoutData = [
-            'product_name' => $this->product->product_name,
             'product_id' => $this->product->product_id,
+            'product_name' => $this->product->product_name,
             'quantity' => $this->quantity,
             'custom_text' => $this->customText,
-            'custom_image' => $this->customImage ? $this->customImage->temporaryUrl() : null,
+            'custom_image' => $this->customImage instanceof \Livewire\Features\SupportFileUploads\TemporaryUploadedFile
+                ? $this->customImage->temporaryUrl()
+                : (is_string($this->customImage) ? $this->customImage : null),
             'selectedAttributes' => $this->selectedAttributes,
-            'unitId' => $this->currentUnit?->product_unit_id ?? null
+            'unitId' => $this->currentUnit?->product_unit_id ?? null,
+            'price' => $this->getCurrentUnitPrice()
         ];
-    
-        Log::info($checkoutData);
-    
-        // 🚀 Redirect to controller route WITH DATA
-        return redirect()->route('buynow.checkout')->with('checkoutData', $checkoutData);
+        \Log::info('Buy Now Checkout Data:', $checkoutData);
+        $this->dispatch('buy-now', $checkoutData);
     }
-    
 
     public function previewCustomization()
     {

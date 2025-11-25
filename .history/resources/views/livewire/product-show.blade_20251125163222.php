@@ -336,7 +336,6 @@
         });
 
         window.addEventListener('buy-now', event => {
-            console.log('ffsdf');
             // Handle buy now event from Livewire (redirect to server checkout)
             const detail = event.detail;
 

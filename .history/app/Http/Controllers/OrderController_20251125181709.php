@@ -43,6 +43,7 @@ class OrderController extends Controller
             $addressId = $validated['address_id'];
             $checkout_type = $validated['checkout_type'];
             
+    
             // Shipping Cost
             if ($checkout_type === 'buy_now') {
                 $shippingCost = $this->shippingService->calculateShippingCost(
@@ -162,7 +163,7 @@ class OrderController extends Controller
         return $itemData;
     }
 
-    protected function createOrderRecords($itemData, $transactionId, $userId, $sessionId, $addressId, $subtotal, $shippingCost, $checkout_type)
+    protected function createOrderRecords($itemData, $transactionId, $userId, $sessionId, $addressId, $subtotal, $shippingCost,$checkout_type)
     {
         Log::info(print_r($itemData, true));
 

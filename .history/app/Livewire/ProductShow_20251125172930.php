@@ -317,7 +317,7 @@ class ProductShow extends Component
     {
         $checkoutData = [
             'product_name' => $this->product->product_name,
-            'product_id' => $this->product->product_id,
+            'product_name' => $this->product->product_id,
             'quantity' => $this->quantity,
             'custom_text' => $this->customText,
             'custom_image' => $this->customImage ? $this->customImage->temporaryUrl() : null,

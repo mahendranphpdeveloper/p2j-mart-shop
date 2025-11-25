@@ -313,24 +313,20 @@ class ProductShow extends Component
     {
         return $this->currentUnit?->unit_price ?? 0;
     }
+
     public function buyNow()
     {
         $checkoutData = [
             'product_name' => $this->product->product_name,
-            'product_id' => $this->product->product_id,
             'quantity' => $this->quantity,
             'custom_text' => $this->customText,
             'custom_image' => $this->customImage ? $this->customImage->temporaryUrl() : null,
             'selectedAttributes' => $this->selectedAttributes,
             'unitId' => $this->currentUnit?->product_unit_id ?? null
         ];
-    
-        Log::info($checkoutData);
-    
-        // 🚀 Redirect to controller route WITH DATA
-        return redirect()->route('buynow.checkout')->with('checkoutData', $checkoutData);
+  Log::info($checkoutData);
+        $this->dispatch('buy-now', $checkoutData);
     }
-    
 
     public function previewCustomization()
     {

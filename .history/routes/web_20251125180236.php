@@ -234,10 +234,8 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/checkout', [Home::class, 'checkout'])->middleware('auth')->name('checkout');
     Route::get('/account', [Home::class, 'userAccount'])->name('user.account');
-    // Route for buy now checkout page (accepts data via session 'with')
-    Route::get('/checkout/buynow', [Home::class, 'buyNowCheckout'])
-        ->middleware('auth')
-        ->name('buynow.checkout');
+    Route::get('/checkout/buynow', [Home::class, 'buyNowCheckout'])->middleware('auth')
+    ->name('buynow.checkout');
 
     Route::get('/orders', [Home::class, 'userOrders'])->name('user.orders');
 
