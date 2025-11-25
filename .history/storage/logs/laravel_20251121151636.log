@@ -1,0 +1,264 @@
+[2025-11-21 09:46:13] local.INFO: array (
+  'draw' => '8',
+  'columns' => 
+  array (
+    0 => 
+    array (
+      'data' => 'DT_RowIndex',
+      'name' => 'DT_RowIndex',
+      'searchable' => 'false',
+      'orderable' => 'false',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    1 => 
+    array (
+      'data' => 'order_id',
+      'name' => 'order_id',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    2 => 
+    array (
+      'data' => 'user_name',
+      'name' => 'user_name',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    3 => 
+    array (
+      'data' => 'mobile',
+      'name' => 'mobile',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    4 => 
+    array (
+      'data' => 'address',
+      'name' => 'address',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    5 => 
+    array (
+      'data' => 'payment_status',
+      'name' => 'payment_status',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    6 => 
+    array (
+      'data' => 'order_status',
+      'name' => 'order_status',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    7 => 
+    array (
+      'data' => 'total_amount',
+      'name' => 'total_amount',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    8 => 
+    array (
+      'data' => 'actions',
+      'name' => 'actions',
+      'searchable' => 'false',
+      'orderable' => 'false',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+  ),
+  'order' => 
+  array (
+    0 => 
+    array (
+      'column' => '1',
+      'dir' => 'desc',
+    ),
+  ),
+  'start' => '0',
+  'length' => '10',
+  'search' => 
+  array (
+    'value' => NULL,
+    'regex' => 'false',
+  ),
+  'order_type' => 'all',
+  'order_status' => 'cancelled',
+  '_' => '1763718253089',
+)  
+[2025-11-21 09:46:14] local.INFO: array (
+  'draw' => '8',
+  'columns' => 
+  array (
+    0 => 
+    array (
+      'data' => 'DT_RowIndex',
+      'name' => 'DT_RowIndex',
+      'searchable' => 'false',
+      'orderable' => 'false',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    1 => 
+    array (
+      'data' => 'order_id',
+      'name' => 'order_id',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    2 => 
+    array (
+      'data' => 'user_name',
+      'name' => 'user_name',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    3 => 
+    array (
+      'data' => 'mobile',
+      'name' => 'mobile',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    4 => 
+    array (
+      'data' => 'address',
+      'name' => 'address',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    5 => 
+    array (
+      'data' => 'payment_status',
+      'name' => 'payment_status',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    6 => 
+    array (
+      'data' => 'order_status',
+      'name' => 'order_status',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    7 => 
+    array (
+      'data' => 'total_amount',
+      'name' => 'total_amount',
+      'searchable' => 'true',
+      'orderable' => 'true',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+    8 => 
+    array (
+      'data' => 'actions',
+      'name' => 'actions',
+      'searchable' => 'false',
+      'orderable' => 'false',
+      'search' => 
+      array (
+        'value' => NULL,
+        'regex' => 'false',
+      ),
+    ),
+  ),
+  'order' => 
+  array (
+    0 => 
+    array (
+      'column' => '1',
+      'dir' => 'desc',
+    ),
+  ),
+  'start' => '0',
+  'length' => '10',
+  'search' => 
+  array (
+    'value' => NULL,
+    'regex' => 'false',
+  ),
+  'order_type' => 'customized',
+  'order_status' => 'cancelled',
+  '_' => '1763718253090',
+)  
