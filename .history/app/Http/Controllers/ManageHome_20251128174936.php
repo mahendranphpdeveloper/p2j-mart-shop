@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Slider;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ManageHome extends Controller
 {
@@ -19,20 +20,112 @@ class ManageHome extends Controller
      */
     public function index()
     {
+        
+         $admin = Auth::guard('admin')->user();
+  
+
         $sliders = Slider::orderBy('updated_at', 'desc')
             ->orderBy('sort_order')
             ->take(4)
             ->get();
     
-        // Get the latest row by id from slider_banner
         $banners = DB::table('slider_banner')->orderBy('id', 'desc')->limit(1)->get();
         $card = DB::table('3_cards')->first();
         $categories = Category::where('status', 1)->orderBy('display_order', 'asc')->get();
+    
+      $productsByCategory = [];
 
-        $gifts = Product::with(['subcategory', 'productImage'])->where('is_deleted', 0)->get();
-     
-        return view('view.index', compact('sliders', 'banners', 'card' ,'categories', 'gifts'));
+$latestCategories = Category::where('status', 1)
+    ->orderBy('updated_at', 'desc') // Get latest updated
+    ->take(8) // Limit to 8
+    ->get();
+
+$firstThreeCategories = $latestCategories->take(3); // First 3 categories
+$nextTwoCategories = $latestCategories->skip(3)->take(2); // Next 2 categories
+$remainingCategories = $latestCategories->skip(5); // Remaining 3 categories
+
+foreach ($firstThreeCategories as $category) {
+    $subcategoryIds = DB::table('sub_categories')
+        ->where('category_id', $category->id)
+        ->pluck('id');
+
+    $productsByCategory['first_three'][$category->title] = Product::with(['productImage', 'productUnit'])
+        ->whereIn('subcategory_id', $subcategoryIds)
+        ->where('is_deleted', 0)
+        ->latest('updated_at')
+        ->get();
+}
+
+foreach ($nextTwoCategories as $category) {
+    $subcategoryIds = DB::table('sub_categories')
+        ->where('category_id', $category->id)
+        ->pluck('id');
+
+    $productsByCategory['next_two'][$category->title] = Product::with(['productImage', 'productUnit'])
+        ->whereIn('subcategory_id', $subcategoryIds)
+        ->where('is_deleted', 0)
+        ->latest('updated_at')
+        ->get();
+}
+
+foreach ($remainingCategories as $category) {
+    $subcategoryIds = DB::table('sub_categories')
+        ->where('category_id', $category->id)
+        ->pluck('id');
+
+    $productsByCategory['remaining'][$category->title] = Product::with(['productImage', 'productUnit'])
+        ->whereIn('subcategory_id', $subcategoryIds)
+        ->where('is_deleted', 0)
+        ->latest('updated_at')
+        ->get();
+}
+
+$trendingProducts = Product::with('productImage')
+    ->where('collection', 1)
+    ->where('is_deleted', 0)
+    ->latest('updated_at')
+    ->take(12)
+    ->get();
+
+$featuredProducts = Product::with('productImage')
+    ->where('collection', 2)
+    ->where('is_deleted', 0)
+    ->latest('updated_at')
+    ->take(12)
+    ->get();
+
+$exclusiveProducts = Product::with('productImage')
+    ->where('collection', 3)
+    ->where('is_deleted', 0)
+    ->latest('updated_at')
+    ->take(12)
+    ->get();
+
+
+    $userId = Auth::id();
+    $sessionId = session()->getId();
+
+    $wishlistproductunitItems = [];
+
+    if ($userId || $sessionId) {
+        $wishlistproductunitItems = \App\Models\Wishlist::where(function ($query) use ($userId, $sessionId) {
+                if ($userId) {
+                    $query->where('user_id', $userId);
+                } else {
+                    $query->where('session_id', $sessionId);
+                }
+            })
+            ->pluck('product_unit_id')
+            ->toArray();
     }
+
+return view('view.index', compact(
+    'sliders', 'banners', 'card', 'categories', 'productsByCategory',
+    'trendingProducts', 'featuredProducts', 'exclusiveProducts'
+));
+
+}
+
     
 
     // Banner management page (if needed for admin panel)
@@ -388,4 +481,31 @@ class ManageHome extends Controller
         }
 
     }
+    
+  public function getUnitList(Request $request)
+{
+    return response()->json([
+        'data' => [
+            [
+                'size_name' => 'Small',
+                'unit_price' => 100,
+                'mrp_price' => 120,
+                'material_name' => 'Cotton',
+                'design_name' => 'Striped',
+                'color_name' => 'Red',
+                'color_code' => '#ff0000',
+                'product_unit_id' => 1,
+                'm_size_id' => 1,
+                'm_material_id' => 1,
+                'm_design_id' => 1,
+                'm_color_id' => 1,
+                'stock' => 50,
+            ]
+        ]
+    ]);
+}
+
+
+  
+
 }
