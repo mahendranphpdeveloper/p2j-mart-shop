@@ -18,7 +18,7 @@
             <div class="categories_wrap d-block d-lg-block">
               <button type="button" data-bs-toggle="collapse" data-bs-target="#navCatContent" aria-expanded="false"
                 class="categories_btn">
-                <i class="fa-solid fa-bars"></i><span>All Categories </span>
+                <i class="fa-solid fa-bars"></i><span> Categories </span>
               </button>
               <div id="navCatContent" class="nav_cat navbar nav collapse">
                 <ul>
