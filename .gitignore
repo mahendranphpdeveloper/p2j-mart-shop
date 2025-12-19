@@ -2,4 +2,8 @@ vendor/
 vendor.zip
 .env
 node_modules/
+<<<<<<< HEAD
+=======
+.history/
+>>>>>>> 6dd4b77 (tylts)
 

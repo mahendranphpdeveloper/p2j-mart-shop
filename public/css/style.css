@@ -7637,6 +7637,20 @@ select option {
     letter-spacing: 0.3px;
 }
 
+<<<<<<< HEAD
+=======
+.category-divider {
+    display: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
+}
+
+.category-divider.show {
+    display: block;
+}
+
+>>>>>>> 6dd4b77 (tylts)
 .widget_categories li,
 .widget_archive li {
     padding-bottom: 10px;
@@ -7668,6 +7682,40 @@ select option {
     font-size: 14px;
 }
 
+<<<<<<< HEAD
+=======
+.category-toggle {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.category-arrow {
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.category-arrow.open {
+    transform: rotate(180deg);
+}
+
+#categoriesList {
+    display: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#categoriesList.show {
+    display: block;
+}
+
+.category-img{
+    min-height:30px;
+    min-width:30px;
+    overflow:hidden;
+}
+
+>>>>>>> 6dd4b77 (tylts)
 .sidebar .widget+.widget {
     border-top: 1px solid #ddd;
     margin-top: 30px;

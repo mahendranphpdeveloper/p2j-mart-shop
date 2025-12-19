@@ -29,6 +29,7 @@
                         <div class="sidebar d-none d-lg-block" id="filterSidebar">
 
                             <!-- Categories -->
+<<<<<<< HEAD
                             <div class="widget mb-4">
                                 <h5 class="widget_title">Categories</h5>
                                 <ul class="widget_categories list-unstyled">
@@ -45,6 +46,38 @@
                                 </ul>
                             </div>
 
+=======
+                           <div class="widget mb-4">
+    <h5 class="widget_title category-toggle" onclick="toggleCategories()">
+        Categories
+        <span id="categoryArrow" class="category-arrow">⌵</span>
+    </h5>
+    <div id="categoryDivider" class="category-divider"></div>
+    <ul class="widget_categories list-unstyled" id="categoriesList">
+       @foreach($categories as $cat)
+<li>
+    <a href="{{ route('category.products', $cat->category_slug) }}"
+       class="{{ $subcategory->category_id == $cat->id ? 'fw-bold text-primary' : '' }}">
+        {{ $cat->title }}
+    </a>
+
+    @if($subcategory->category_id == $cat->id)
+        <ul class="ps-3">
+            @foreach($cat->subcategories as $sub)
+                <li>
+                    <a href="{{ route('subcategory.products', $sub->id) }}"
+                       class="{{ $subcategory->id == $sub->id ? 'fw-bold text-danger' : '' }}">
+                        {{ $sub->title }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+</li>
+@endforeach
+
+</div>
+>>>>>>> 6dd4b77 (tylts)
                             <!-- Price Filter -->
                             <div class="widget mb-4">
                                 <h5 class="widget_title">Filter</h5>
@@ -201,9 +234,27 @@
     </section>
 </div>
 
+<<<<<<< HEAD
 @endsection
 
 <script>  document.addEventListener('DOMContentLoaded', function () {
+=======
+
+
+<script> 
+function toggleCategories() {
+    const categoriesList = document.getElementById('categoriesList');
+    const arrow = document.getElementById('categoryArrow');
+    const divider = document.getElementById('categoryDivider');
+    
+    categoriesList.classList.toggle('show');
+    arrow.classList.toggle('open');
+    divider.classList.toggle('show'); 
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+>>>>>>> 6dd4b77 (tylts)
     console.log("DOM loaded - Add to Cart script initialized");
 
     const addToCartButtons = document.querySelectorAll('.btn-addtocart');
@@ -331,3 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
     updateWishlistCount();
 });
 </script>
+<<<<<<< HEAD
+=======
+@endsection
+>>>>>>> 6dd4b77 (tylts)

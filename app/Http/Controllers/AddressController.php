@@ -53,6 +53,11 @@ class AddressController extends Controller
 
     $address->save();
 
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> 6dd4b77 (tylts)
     Log::info('AddressController: Address saved to database', ['address_id' => $address->id]);
 
      return response()->json([

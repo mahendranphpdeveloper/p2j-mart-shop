@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Auth;
+>>>>>>> 6dd4b77 (tylts)
 class CategoryController extends Controller
 {
     // Display all categories ordered by display_order
@@ -42,7 +46,11 @@ class CategoryController extends Controller
                 'max:255',
                 Rule::unique('categories'), 
             ],
+<<<<<<< HEAD
             // 'category_slug' => 'required|string|max:255|unique:categories,category_slug',    
+=======
+             //'category_slug' => 'required|string|max:255|unique:categories,category_slug',    
+>>>>>>> 6dd4b77 (tylts)
           'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,avif,svg|max:2048',
             'description' => 'nullable|string',
             'display_order' => 'required|integer|min:1',
@@ -200,12 +208,21 @@ class CategoryController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
   public function show($id)
+=======
+  public function show($slug)
+>>>>>>> 6dd4b77 (tylts)
 {
     // Fetch the specific category with its products
     $category = Category::with('products')
         ->where('status', 'active')
+<<<<<<< HEAD
         ->findOrFail($id);
+=======
+        ->where('category_slug', $slug)
+        ->firstOrFail(); 
+>>>>>>> 6dd4b77 (tylts)
 
     // Fetch all active categories for the sidebar
     $categories = Category::withCount('products')

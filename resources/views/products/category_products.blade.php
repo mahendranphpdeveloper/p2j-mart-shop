@@ -35,7 +35,11 @@
                                         <li>
                                             <a href="{{ route('category.products', ['slug' => $cat->category_slug]) }}">
                                                 <span class="categories_name">{{ $cat->title }}</span>
+<<<<<<< HEAD
                                                 <span class="categories_num">({{ $cat->products_count }})</span>
+=======
+                                                <!--<span class="categories_num"></span>-->
+>>>>>>> 6dd4b77 (tylts)
                                             </a>
                                         </li>
                                     @empty

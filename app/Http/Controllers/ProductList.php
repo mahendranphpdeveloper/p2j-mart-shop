@@ -94,7 +94,11 @@ class ProductList extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'subcategory_id' => 'required|integer',
+<<<<<<< HEAD
             'quantity' => 'required|integer|min:1', // Add validation for quantity
+=======
+            'quantity' => 'integer|min:1', // Add validation for quantity
+>>>>>>> 6dd4b77 (tylts)
             'description' => 'nullable|string',
             'height' => 'nullable|numeric',
             'height_unit' => 'nullable|string|in:mm,cm,in,m',

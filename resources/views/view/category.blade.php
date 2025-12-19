@@ -12,7 +12,11 @@
 
     <!-- START SECTION BREADCRUMB -->
 <div class="page-title-mini py-1">
+<<<<<<< HEAD
     <div class="container-fluid"><!-- START CONTAINER -->
+=======
+    <div class="container-fluid p-0"><!-- START CONTAINER -->
+>>>>>>> 6dd4b77 (tylts)
         <div class="row align-items-center w-100">
             <div class="col-md-6 d-flex">
                 <h2 class="breadcrumb-title">All Categories</h2>
@@ -35,7 +39,11 @@
 
     @if($cat->subcategories->count())
         <div class="swiper-container category-swiper mb-5 position-relative">
+<<<<<<< HEAD
             <div class="swiper-wrapper">
+=======
+            <div class="swiper-wrapper px-5">
+>>>>>>> 6dd4b77 (tylts)
             @foreach($cat->subcategories as $sub)
     <div class="swiper-slide category-slide">
         <a href="{{ route('subcategory.products', $sub->id) }}">

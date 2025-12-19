@@ -53,7 +53,11 @@
                                     <img class="category-img" src="{{ asset($category->image) }}" alt="{{ $category->title }}" />
                                   </div>
                                   <div class="pb-1"> <!-- Button container -->
+<<<<<<< HEAD
                                     <a href="{{ route('category.products', $category->id) }}"
+=======
+                                    <a href="{{ route('category.products', $category->category_slug) }}"
+>>>>>>> 6dd4b77 (tylts)
                                       class="btn btn-sm btn-outline-primary w-100">
                                       View All
                                     </a>
@@ -67,6 +71,7 @@
                     @endif
                   @endforeach
 
+<<<<<<< HEAD
                   <!-- More Categories Section for categories beyond 7 -->
                   <li>
                     <ul class="more_slide_open">
@@ -82,6 +87,56 @@
                       @endforeach
                     </ul>
                   </li>
+=======
+ <!-- More Categories Section (Hidden by default, shown when clicked) -->
+        <li>
+            <ul class="more_slide_open" style="display: none;">
+                @foreach($categories as $index => $category)
+                    @if($category->status === 'active' && $index >= 7)
+                        <li class="dropdown dropdown-mega-menu">
+                            <a class="dropdown-item nav-link dropdown-toggler" href="#" data-bs-toggle="dropdown">
+                                <img src="{{ asset($category->image) }}" alt="{{ $category->title }}" />
+                                <span class="ps-3">{{ $category->title }}</span>
+                            </a>
+
+                            {{-- Dropdown with Subcategories for More Categories --}}
+                            @if($category->subcategories && $category->subcategories->count())
+                                <div class="dropdown-menu p-2" style="min-width: 250px; max-width: 350px;">
+                                    <div class="d-flex w-100">
+                                        <!-- Subcategories List -->
+                                        <div class="flex-grow-1">
+                                            <div class="pe-2">
+                                                @foreach ($category->subcategories->sortByDesc('updated_at') as $sub)
+                                                    <a class="dropdown-item d-block py-2 px-2 text-truncate border-bottom"
+                                                        href="{{ route('subcategory.products', $sub->id) }}">
+                                                        {{ $sub->title }}
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        <!-- Promo Banner -->
+                                        <div class="border-start ps-2 d-flex flex-column" style="width: 120px;">
+                                            <div class="flex-grow-1 mb-2">
+                                                <img class="category-img" src="{{ asset($category->image) }}" alt="{{ $category->title }}" />
+                                            </div>
+                                            <div class="pb-1">
+                                                <a href="{{ route('category.products', $category->category_slug) }}"
+                                                    class="btn btn-sm btn-outline-primary w-100">
+                                                    View All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </li>
+                    @endif
+                @endforeach
+            </ul>
+        </li>
+    </ul>
+>>>>>>> 6dd4b77 (tylts)
                 </ul>
                 @if($categories->count() > 7)
                   <div class="more_categories">More Categories</div>
@@ -1282,6 +1337,23 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+<<<<<<< HEAD
+=======
+
+function toggleMoreCategories() {
+    const moreSlide = document.querySelector('.more_slide_open');
+    const moreBtn = document.querySelector('.more_categories');
+    
+    if (moreSlide.style.display === 'none' || moreSlide.style.display === '') {
+        moreSlide.style.display = 'block';
+        moreBtn.textContent = 'Less Categories';
+    } else {
+        moreSlide.style.display = 'none';
+        moreBtn.textContent = 'More Categories';
+    }
+}
+
+>>>>>>> 6dd4b77 (tylts)
 document.addEventListener('DOMContentLoaded', function () {
   // ----------- Cart Add Handler -----------
   const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');

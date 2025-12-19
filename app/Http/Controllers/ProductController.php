@@ -428,6 +428,30 @@ public function showSubcategoryProducts($subcategoryId)
     return view('products.subcategory_products', compact('subcategory', 'products', 'sizes'));
 }
 
+<<<<<<< HEAD
+=======
+public function subcategoryProducts($slug)
+{
+    $subcategory = Subcategory::where('slug', $slug)->firstOrFail();
+
+    $products = Product::where('subcategory_id', $subcategory->id)
+        ->where('status', 'active')
+        ->with(['productImage', 'units'])
+        ->paginate(12);
+
+    $categories = Category::with('subcategories')
+        ->where('status', 'active')
+        ->get();
+
+    return view('products.subcategory', compact(
+        'products',
+        'subcategory',
+        'categories'
+    ));
+}
+
+
+>>>>>>> 6dd4b77 (tylts)
 public function yourFunctionName()
 {
     $categories = Category::where('status', 'active')
